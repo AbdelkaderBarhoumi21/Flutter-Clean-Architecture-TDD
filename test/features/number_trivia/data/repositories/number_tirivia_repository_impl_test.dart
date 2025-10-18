@@ -139,7 +139,6 @@ void main() {
           final result = await repository.getConcreteNumberTrivia(
             tNumber,
           ); //without await you will return future instance
-
           //verify
           verify(
             mockRemoteDataSource.getConcreteNumberTrivia(tNumber),
