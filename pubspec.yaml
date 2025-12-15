@@ -22,7 +22,8 @@ dependencies:
   dartz: ^0.10.1
 
   #Remote API
-
+  #open a socket a listen to the socket it doesn't check if device android or ios
+  data_connection_checker_nulls: ^0.0.2
   connectivity_plus: ^7.0.0
   http: ^1.5.0
 

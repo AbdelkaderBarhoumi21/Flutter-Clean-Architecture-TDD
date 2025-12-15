@@ -4,10 +4,14 @@ import 'package:flutter_clean_architecture/features/number_trivia/domain/entitie
 import 'package:flutter_clean_architecture/features/number_trivia/domain/repositories/number_trivia_repositories.dart';
 import 'package:flutter_clean_architecture/features/number_trivia/domain/usescases/get_random_number_trivia.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-class MockNumberTriviaRepositories extends Mock
-    implements NumberTriviaRepositories {}
+import 'get_concrete_number_trivia_test.mocks.dart';
+
+//class MockNumberTriviaRepositories extends Mock implements NumberTriviaRepositories {} == @GenerateMocks([NumberTriviaRepositories])
+
+@GenerateMocks([NumberTriviaRepositories])
 
 void main() {
   late GetRandomNumberTrivia useCase;
