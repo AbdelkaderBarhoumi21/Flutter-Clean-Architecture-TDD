@@ -23,21 +23,19 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     required GetConcreteNumberTrivia concrete,
     required GetRandomNumberTrivia random,
     required this.inputConverter,
-  })  : getConcreteNumberTrivia = concrete,
-        getRandomNumberTrivia = random,
-        super(Empty()) {
+  }) : getConcreteNumberTrivia = concrete,
+       getRandomNumberTrivia = random,
+       super(Empty()) {
     on<GetTriviaForConcreteNumber>(_onGetTriviaForConcreteNumber);
     on<GetTriviaForRandomNumber>(_onGetTriviaForRandomNumber);
   }
-  @override
-  NumberTriviaState get initialState => Empty();
-
   Future<void> _onGetTriviaForConcreteNumber(
     GetTriviaForConcreteNumber event,
     Emitter<NumberTriviaState> emit,
   ) async {
-    final inputEither =
-        inputConverter.stringToUnsignedInteger(event.numberString);
+    final inputEither = inputConverter.stringToUnsignedInteger(
+      event.numberString,
+    );
 
     await inputEither.fold(
       (failure) async {
@@ -45,8 +43,9 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       },
       (integer) async {
         emit(Loading());
-        final failureOrTrivia =
-            await getConcreteNumberTrivia(Params(number: integer));
+        final failureOrTrivia = await getConcreteNumberTrivia(
+          Params(number: integer),
+        );
 
         failureOrTrivia.fold(
           (failure) => emit(Error(message: _mapFailureToMessage(failure))),
@@ -70,6 +69,8 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   }
 
   String _mapFailureToMessage(Failure failure) {
+    //runTimeType returb the actual class/tye of an object at runtime
+    //failure is a Failure(base clase )
     switch (failure.runtimeType) {
       case ServerFailure:
         return SERVER_FAILURE_MESSAGE;
