@@ -21,12 +21,12 @@ class NumberTriviaRemoteDatasourceImpl implements NumberTriviaRemoteDatasource {
   const NumberTriviaRemoteDatasourceImpl({required this.client});
 
   @override
-  Future<NumberTriviaModel> getConcreteNumberTrivia(int number)=>
-      _getTriviaFromUrl('http://127.0.0.1:8083/$number');
+  Future<NumberTriviaModel> getConcreteNumberTrivia(int number) =>
+      _getTriviaFromUrl('http://10.0.2.2:8083/$number');
 
   @override
   Future<NumberTriviaModel> getRandomNumberTrivia() =>
-      _getTriviaFromUrl('http://127.0.0.1:8083/random');
+      _getTriviaFromUrl('http://10.0.2.2:8083/random');
 
   Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
     final response = await client.get(
